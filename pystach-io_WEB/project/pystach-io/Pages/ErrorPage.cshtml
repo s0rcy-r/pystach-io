@@ -1,0 +1,25 @@
+﻿@page
+@model pystach_io.Pages.ErrorPageModel
+@{
+    ViewData["Title"] = "Error " + @Model.ErrorStatusCode;
+}
+
+<div class="container text-center">
+
+    <h1 class="mt-5 mb-3" style="font-family: 'Quicksand', sans-serif;">@Html.Raw(Model.ErrorMessage)</h1>
+
+    @if (Model.ErrorStatusCode == 404)
+    {
+        <img src="~/images/errors/404.png" class="img-fluid mx-auto d-block w-50" />
+    }
+
+    @if (Model.ErrorStatusCode == 500 | Model.ErrorStatusCode == 502)
+    {
+        <img src="~/images/errors/500.png" class="img-fluid mx-auto d-block w-50" />
+    }
+
+    @if (Model.ErrorStatusCode != 404 & Model.ErrorStatusCode != 500 & Model.ErrorStatusCode != 502)
+    {
+        <img src="~/images/errors/other.png" class="img-fluid mx-auto d-block w-50" />
+    }
+</div>

@@ -1,0 +1,12 @@
+﻿:root {
+    --primary-color: #d8e2dc;
+    --secondary-color: #FD9886;
+    --dark-primary-color: #fff;
+    --dark-secondary-color: #aaa;
+    --fall-primary-color: #d08c60;
+    --fall-secondary-color: #9b9b7a;
+}
+
+body {
+    background: linear-gradient(var(--primary-color), var(--secondary-color)) fixed;
+}

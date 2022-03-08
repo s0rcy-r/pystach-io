@@ -7,7 +7,7 @@ from math import radians, cos, sin, acos
 
 
 class PystachioAPI:
-    def __init__(self, addresses, mode):
+    def __init__(self, addresses, mode, apikey):
         """Initialisation of the class
 
         Args:
@@ -16,7 +16,7 @@ class PystachioAPI:
         """
 
         if mode == "time":
-            self.client = googlemaps.Client(key="APIKEYHERE")
+            self.client = googlemaps.Client(key=apikey)
 
         self.addresses = addresses
         self.mode = mode

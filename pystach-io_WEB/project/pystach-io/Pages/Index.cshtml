@@ -1,0 +1,190 @@
+﻿@page
+@model IndexModel
+@{
+    int i = (int)ViewData["len"];
+    ViewData["Active"] = TabNavPages.Home;
+
+    ViewBag.title = "PyStach.io v.α | Fast & Optimized Itineraries";
+}
+
+@section Head {
+    <script>
+        window.onload = function () {
+            liste = document.getElementById("table");
+            Init();
+        }
+    </script>
+
+    <script>
+        function add() {
+            var tr = document.createElement("tr");
+            tr.id = i;
+            tr.style.display = "none";
+
+            var td = document.createElement("td");
+            td.classList.add("input-group");
+            td.classList.add("input-group-lg");
+
+            var text = document.createElement("input");
+            text.type = "text";
+            text.name = "address_" + i;
+            text.placeholder = "Address n°" + i;
+            text.classList.add("form-control");
+            text.classList.add("form-control-lg");
+
+            var app = document.createElement("div");
+            app.classList.add("input-group-append");
+
+            var btn = document.createElement("a");
+            btn.classList.add("btn");
+            btn.classList.add("btn-secondary");
+            btn.classList.add("p-3");
+            btn.style.fontFamily = "'Quicksand', sans-serif";
+            btn.style.fontWeight = "bold";
+            btn.setAttribute("onclick", "del()");
+
+            var logo = document.createElement("i");
+            logo.classList.add("far");
+            logo.classList.add("fa-times-circle");
+            logo.classList.add("text-center");
+            logo.classList.add("mt-1");
+            logo.style.fontSize = "1.4em";
+
+            btn.appendChild(logo);
+            app.appendChild(btn);
+            td.appendChild(text);
+            td.appendChild(app);
+            tr.appendChild(td);
+            liste.appendChild(tr);
+            $("#" + i).show("slow");
+            i++;
+        }
+
+        function del() {
+            i--;
+            tr = document.getElementById(i);
+            $(tr).hide("slow");
+            setTimeout(function () { tr.remove(); }, 500);
+        }
+
+        function del_error(id) {
+            tr = document.getElementById(id);
+            $(tr).hide("slow");
+            setTimeout(function () { tr.remove(); }, 500);
+            i--;
+        }
+    </script>
+}
+
+<div class="p-5" style="font-family: 'Quicksand', sans-serif;">
+    @if (ViewData["error"].ToString() == "pystach")
+    {
+        <div class="alert alert-danger" role="alert" id="error">
+            PyStach.io have an error with this address : @ViewData["errorContent"].ToString()
+            <a onclick='$("#error").slideToggle("slow");' class="float-end" style="color: black;"><i class="far fa-times-circle"></i></a>
+        </div>
+    }
+    else if (ViewData["error"].ToString() == "address")
+    {
+        <div class="alert alert-danger" role="alert" id="error">
+            You should put at least two addresses.
+            <a onclick='$("#error").slideToggle("slow");' class="float-end" style="color: black;"><i class="far fa-times-circle"></i></a>
+        </div>
+    }
+
+    <p style="font-size: 1.5em" class="text-center">
+        Please, indicate your list of addresses as follows : <span style="text-decoration: underline;">Street name, CITY</span> or <span style="text-decoration: underline;">CITY</span>
+        <br>
+        <span style="font-style: italic;">(put the address where you are in the first position)</span>
+    </p>
+
+    <script>var i = @i;</script>
+
+    <form method="POST" id="appForm" name="appForm">
+        @Html.AntiForgeryToken()
+        <table class="table">
+            <tbody id="table">
+                @if (ViewData["error"].ToString() == "pystach")
+                {
+                    var j = 0;
+
+                    @foreach (var address in ViewData["addresses"] as string[])
+                    {
+                        <tr id="@j">
+                            <td class="input-group input-group-lg">
+                                @if (address == ViewData["errorContent"].ToString())
+                                {
+                                    <input type="text" name="address_@j" value="@address" class="form-control form-control-lg" style="color: #ff6a00; font-weight: bold;">
+                                }
+                                else
+                                {
+                                    <input type="text" name="address_@j" value="@address" class="form-control form-control-lg">
+                                }
+                                @if (j > 0)
+                                {
+                                    <div class="input-group-append">
+                                        <a class="btn btn-secondary p-3" onclick="del_error(@j)">
+                                            <i class="far fa-times-circle" style="font-size : 1.4em"></i>
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="input-group-append">
+                                        <a class="btn btn-secondary p-3" onclick="">
+                                            <i class="fas fa-map-marker-alt" style="font-size : 1.6em"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+
+                        j++;
+                    }
+                }
+                else
+                {
+                    <tr id="0">
+                        <td class="input-group input-group-lg">
+                            <input type="text" name="address_0" placeholder="Your departure address" class="form-control form-control-lg">
+                            <div class="input-group-append">
+                                <a class="btn btn-secondary p-3" onclick="">
+                                    <i class="fas fa-map-marker-alt" style="font-size : 1.6em"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-7">
+                <a class="btn btn-lg text-light" style="background-color: #98CFD7; font-family: 'Quicksand', sans-serif; font-weight: bold;" onclick="add()">Add a line</a>
+            </div>
+            <div class="col-5">
+                <button type="submit" class="btn btn-lg text-light float-end" style="background-color: #98CFD7; font-family: 'Quicksand', sans-serif; font-weight: bold;">Submit</button>
+            </div>
+        </div>
+    </form>
+    <br />
+</div>
+
+
+@if (ViewData["url"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Here is your pistachios !',
+            showCloseButton: true,
+            showDenyButton: true,
+            focusConfirm: false,
+            confirmButtonText: 'Take me to it !',
+            denyButtonText: 'Quit',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open('@ViewData["url"].ToString()', '_blank').focus();
+        }});
+    </script>
+}

@@ -1,0 +1,44 @@
+﻿@page
+
+@model pystach_io.Pages.InformationsModel
+
+@{
+    ViewData["Active"] = TabNavPages.Infos;
+    ViewBag.title = "PyStach.io v.α | Fast & Optimized Itineraries | Informations";
+}
+
+<div class="p-5" style="font-size: 1.5em; font-family: 'Quicksand', sans-serif;">
+    <h1 class="mb-4 pb-2" style="border-bottom : solid 1px gray; font-weight: bold;">
+        <i class="fas fa-info-circle"></i>
+        Informations
+    </h1>
+
+    <section class="pb-2">
+        <h1 style="font-weight: bold;">🤔 What is PyStach.io?</h1>
+        <p>
+            <b>PyStach.io</b> is the "enhanced-version" of <b>MaPyto</b> <i>(an open source Django web application available <a href="http://www.github.com/s0rcy-r/mapyto">here</a>)</i>.
+            The original version of the application can give you an optimal route on <b>Google Map</b> without any limit of addresses.
+            This version does the same, but it is set to add more tools developed for professionals.  <br />
+            <u>The uses of this application are multiple:</u> you could plan a road trip, make delivery planning ... etc. <br />
+            Let’s make a little history of this project. Originally, I developed this application for a friend who worked at UPS.
+            Some of his colleagues liked it and some friends like the idea so, I’ve decided to deploy the application for everyone.
+        </p>
+    </section>
+
+    <section class="pb-2">
+        <h1 style="font-weight: bold;">🧐 How does it work?</h1>
+        <p>
+            You just have to go to the main page, add all the addresses you want <i>(by clicking on the <span style="color: #98CFD7; font-weight: 900;" class="text-decoration-underline">Add a line</span> button)</i>
+            and click on <span style="color: #98CFD7; font-weight: 900;" class="text-decoration-underline">Submit</span>. 
+            After that, you will have a special the link <i>(called <b>"Pistachios"</b> because it’s funny)</i> to your optimized route on <b>Google Maps</b> 
+            <i>(and it even works on a smartphone!)</i>.
+</p>
+    </section>
+
+    <section class="pb-2">
+        <h1 style="font-weight: bold;">🤓 How to contribute?</h1>
+        <p>
+            <b>PyStach.io</b> is an open source project so you just have to go on <b>GitHub</b> and fork it! <br />
+        </p>
+    </section>
+</div>
