@@ -1,7 +1,6 @@
 # Pystach.io :earth_africa: | by s0rcy_r『魔女』
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/s0rcy-r/pystach-io?style=for-the-badge)
-![Lines of code](https://img.shields.io/tokei/lines/github/s0rcy-r/pystach-io?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/s0rcy-r/pystach-io?style=for-the-badge)
 
 ## :warning: WORK IN PROGRESS :warning:
